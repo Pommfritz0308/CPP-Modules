@@ -1,16 +1,30 @@
 #include "ClapTrap.hpp"
 #include <limits>
 
+ClapTrap::ClapTrap()
+{
+
+}
+
 ClapTrap::ClapTrap(std::string name) : name(name), hitPoints(10), energyPoints(10), attackDmg(0)
 {
-	std::cout << GBOLD("ClapTrap ") << GBOLD(name) << GBOLD(" constructed!\n");
+	std::cout << "ClapTrap " << name << " default attributes constructed!\n";
 }
+
+ClapTrap::ClapTrap(std::string name, unsigned int hitPoints, unsigned int energyPoints, unsigned int attackDmg)
+	: name(name), hitPoints(hitPoints), energyPoints(energyPoints), attackDmg(attackDmg)
+{
+	std::cout << "ClapTrap " << name << " with custom attributes constructed!\n";
+}
+
 
 ClapTrap::ClapTrap(const ClapTrap &t) : name(t.name), hitPoints(t.hitPoints),
 	 energyPoints(t.energyPoints), attackDmg(t.attackDmg)
 {
-	std::cout << GBOLD("ClapTrap ") << GBOLD(name) << GBOLD(" copied!\n");
+	std::cout << "ClapTrap " << name << " copied!\n";
 }
+
+
 
 ClapTrap& ClapTrap::operator= (const ClapTrap &old)
 {
@@ -27,7 +41,7 @@ ClapTrap& ClapTrap::operator= (const ClapTrap &old)
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << GBOLD("ClapTrap ") << GBOLD(name) << GBOLD(" destroyed!\n");
+	std::cout << "ClapTrap " << name << " destroyed!\n";
 }
 
 void ClapTrap::attack(const std::string& target)
