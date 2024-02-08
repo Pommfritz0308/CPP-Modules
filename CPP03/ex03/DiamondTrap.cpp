@@ -16,7 +16,7 @@ DiamondTrap::DiamondTrap(const std::string& name) :
     std::cout << GBOLD("DiamondTrap attack damage: ") << FragTrap::attackDmg << std::endl;
 }
 
-DiamondTrap& DiamondTrap::operator= (DiamondTrap &old)
+DiamondTrap& DiamondTrap::operator= (const DiamondTrap &old)
 {
     _name = old._name;
     return *this;

@@ -14,12 +14,12 @@ ScavTrap::ScavTrap(const std::string name)
     std::cout << "ScavTrap " << name << " constructed!\n";
 }
 
-ScavTrap::ScavTrap(ScavTrap &old) : ClapTrap(old)
+ScavTrap::ScavTrap(const ScavTrap &old) : ClapTrap(old)
 {
 	std::cout << "ScavTrap " << old.name << " copied!\n";
 }
 
-ScavTrap& ScavTrap::operator= (ScavTrap &old)
+ScavTrap& ScavTrap::operator= (const ScavTrap &old)
 {
 	if(this != &old)
 	{

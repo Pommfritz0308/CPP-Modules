@@ -14,12 +14,12 @@ FragTrap::FragTrap(const std::string name)
     std::cout << "FragTrap " << name << " constructed!\n";
 }
 
-FragTrap::FragTrap(FragTrap &old) : ClapTrap(old)
+FragTrap::FragTrap(const FragTrap &old) : ClapTrap(old)
 {
 	std::cout << "FragTrap " << old.name << " copied!\n";
 }
 
-FragTrap& FragTrap::operator= (FragTrap &old)
+FragTrap& FragTrap::operator= (const FragTrap &old)
 {
 	if(this != &old)
 	{
