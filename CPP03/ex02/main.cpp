@@ -1,18 +1,19 @@
 #include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
 int main ()
 {
-    ScavTrap a ("Child");
+    FragTrap a ("Child");
 
     a.attack("Zombie");
     a.takeDamage(120);
     a.beRepaired(50);
-    a.guardGate();
+    a.highFivesGuys();
 
-    ScavTrap b (a);
+    FragTrap b (a);
     b.attack("Zombie");
     b.takeDamage(120);
     b.beRepaired(50);
-    b.guardGate();
+    b.highFivesGuys();
 
 }

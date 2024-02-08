@@ -1,5 +1,10 @@
 #include "ScavTrap.hpp"
 
+ScavTrap::ScavTrap()
+{
+	std::cout << GBOLD("ScavTrap constructed!\n");
+}
+
 ScavTrap::ScavTrap(const std::string name) : ClapTrap("Parent", 100, 50, 20)
 {
     std::cout << GBOLD("ScavTrap ") << GBOLD(name) << GBOLD(" constructed!\n");

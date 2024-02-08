@@ -2,10 +2,15 @@
 # define SCAV_TRAP_HPP
 # include "ClapTrap.hpp"
 
-class ScavTrap : public ClapTrap
+class ScavTrap : virtual public ClapTrap
 {
+    protected:
+
+        unsigned int		energyPoints;
+        
     public:
 
+        ScavTrap();
         ScavTrap(const std::string name);
         ScavTrap(ScavTrap &old);
         ScavTrap& operator= (ScavTrap &old);

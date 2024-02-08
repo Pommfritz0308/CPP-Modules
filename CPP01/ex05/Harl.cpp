@@ -5,6 +5,10 @@ void Harl::debug( void )
 	std::cout << "Du Russelnase!" << std::endl;
 }
 
+void Harl::error( void )
+{
+	std::cout << "* Strong Mort attackiert Elefanten *\n";
+}
 void Harl::info( void )
 {
 	std::cout << "Gib mir sofort alle deine Erdnusse!\n";
@@ -15,20 +19,15 @@ void Harl::warning( void )
 	std::cout << "Tut mir Leid, aber ich hab keine...\n";
 }
 
-void Harl::error( void )
-{
-	std::cout << "* Strong Mort attackiert Elefanten *\n";
-}
 
 void Harl::complain( std::string level )
 {
-	std::string levels[4] = {"debug", "info", "warning", "error"};
-	void (Harl::*functions[4])() = {&Harl::debug, &Harl::error, &Harl::info, &Harl::warning};
-	for (int i = 0; i < 4; i++)
+	t_function functions[4] = {{"debug", &Harl::debug}, {"error", &Harl::error}, {"info", &Harl::info}, {"warning", &Harl::warning}}; // declaring array of structs
+	for (int i = 0; i < 4; i++) // loop through array of function pointers
 	{
-		if (levels[i] == level)
+		if (functions[i].level == level)
 		{
-			(this->*functions[i])();
+			(this->*functions[i].function)(); // call function
 			return ;
 		}
 	}

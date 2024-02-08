@@ -5,7 +5,7 @@ unsigned int ClapTrap::maxHitPoints = 100;
 
 ClapTrap::ClapTrap()
 {
-
+	std::cout << "ClapTrap default constructed!\n";
 }
 
 ClapTrap::ClapTrap(std::string name) : name(name), hitPoints(10), energyPoints(10), attackDmg(0)

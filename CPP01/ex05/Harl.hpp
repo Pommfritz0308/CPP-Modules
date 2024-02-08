@@ -19,4 +19,10 @@ class Harl
 		void complain( std::string level );
 };
 
+struct t_function
+{
+	std::string level;
+	void (Harl::*function)( void );
+};
+
 #endif

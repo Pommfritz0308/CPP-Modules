@@ -18,9 +18,9 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	std::string newFile = std::string(argv[1]) + ".replace";
-	std::ofstream outFile(newFile);
+	std::ofstream outFile(newFile.c_str());
 	std::string buffer((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
-	if (!argv[3] || !argv[4])
+	if (!argv[2] || !argv[3])
 		outFile << buffer;
 	else
 	{

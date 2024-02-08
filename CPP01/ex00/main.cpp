@@ -8,6 +8,11 @@ int	main (int argc, char **argv)
 	Zombie* newZombie;
 	Zombie::randomChump(argv[1]);
 	newZombie = Zombie::newZombie(argv[1]);
+	if (newZombie == NULL)
+	{
+		std::cerr << "Error: newZombie returned NULL" << std::endl;
+		return (1);
+	}
 	newZombie->announce();
 	delete newZombie;
 	return (0);

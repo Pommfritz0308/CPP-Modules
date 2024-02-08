@@ -19,6 +19,11 @@ int	main (int argc, char **argv)
 		return (1);
 	int n = 5;
 	Zombie* horde = Zombie::zombieHorde(n, argv[1]);
+	if (!horde)
+	{
+		std::cerr << "Error: zombieHorde returned NULL" << std::endl;
+		return (1);
+	}
 	delete [] horde;
 	return (0);
 }
