@@ -13,7 +13,7 @@
 NAME = ex00
 CFLAGS = -Wall -Wextra -Werror -g -std=c++98
 
-SCRS = main.cpp Animal.cpp 
+SCRS = main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp
 OBJS = $(SCRS:.cpp=.o)
 
 all: $(NAME)
