@@ -1,5 +1,5 @@
-#ifndef ANIMAL_HPP
-# define ANIMAL_HPP
+#ifndef WRONG_ANIMAL_HPP
+# define WRONG_ANIMAL_HPP
 # include <cctype>
 # include <iostream>
 # include <stdlib.h>
@@ -12,7 +12,7 @@
 # define RBOLD(x) "\x1B[1m" + std::string(KRED) + x + RST
 # define BOLD(x) "\x1B[1m" << x << RST
 
-class Animal
+class WrongAnimal
 {
     protected:
 
@@ -20,14 +20,12 @@ class Animal
 
     public:
 
-        Animal();
-        Animal(const Animal &old);
-        Animal& operator= (const Animal &t);
-        virtual ~Animal();
+        WrongAnimal();
+        WrongAnimal(const WrongAnimal &old);
+        WrongAnimal& operator= (const WrongAnimal &t);
+        ~WrongAnimal();
         std::string getType() const;
-        virtual void makeSound() const;
-        virtual void setIdea(int i, std::string idea);
-        virtual void printIdeas() const;
+        void makeSound() const;
 };
 
 #endif

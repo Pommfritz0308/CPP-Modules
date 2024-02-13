@@ -8,7 +8,8 @@ int main()
 {
     int nb = 5;
     
-    // Test setIdea and printIdeas;
+    // Test setIdea and printIdeas
+    // Animal uninstatiated;
     Animal* animals[nb];
     for (int i = 0; i < nb; i++)
     {
