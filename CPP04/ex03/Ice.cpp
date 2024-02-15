@@ -2,17 +2,17 @@
 
 Ice::Ice() : AMateria("ice")
 {
-    std::cout << "Ice default constructor" << std::endl;
+    // std::cout << "Ice default constructor" << std::endl;
 }
 
 Ice::Ice(const Ice &old) : AMateria(old)
 {
-    std::cout << "Ice copy constructor" << std::endl;
+    // std::cout << "Ice copy constructor" << std::endl;
 }
 
 Ice& Ice::operator= (const Ice &old)
 {
-    std::cout << "Ice assignation operator" << std::endl;
+    // std::cout << "Ice assignation operator" << std::endl;
     if (this != &old)
     {
         _type = old._type;
@@ -22,7 +22,7 @@ Ice& Ice::operator= (const Ice &old)
 
 Ice::~Ice()
 {
-    std::cout << "Ice destructor" << std::endl;
+    // std::cout << "Ice destructor" << std::endl;
 }
 
 AMateria* Ice::clone() const
@@ -34,3 +34,4 @@ void Ice::use(ICharacter& target)
 {
     std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
 }
+

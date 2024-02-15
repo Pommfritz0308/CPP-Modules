@@ -2,17 +2,41 @@
 
 Character::Character()
 {
+    for (int i = 0; i < 4; i++)
+    {
+        _materias[i] = NULL;
+        _floor[i] = NULL;
+    }
     std::cout << "Character default constructor" << std::endl;
 }
 
 Character::Character(std::string name) : _name(name)
 {
-    std::cout << "Character constructor" << std::endl;
+    for (int i = 0; i < 4; i++)
+    {
+        _materias[i] = NULL;
+        _floor[i] = NULL;
+    }
+    std::cout << "Character \"" << name << "\" constructor" << std::endl;
 }
 
-Character::Character(const Character &old)
+Character::Character(const Character &old) : _name(old._name)
 {
     std::cout << "Character copy constructor" << std::endl;
+    _name = old._name;
+    for (int i = 0; i < 4; i++)
+    {
+        if (old._materias[i] != NULL)
+        {
+            _materias[i] = old._materias[i]->clone();
+            _floor[i] = _materias[i];
+        }
+        else
+        {
+            _materias[i] = NULL;
+            _floor[i] = NULL;
+        }
+    }
 }
 
 Character& Character::operator= (const Character &old)
@@ -21,13 +45,31 @@ Character& Character::operator= (const Character &old)
     if (this != &old)
     {
         _name = old._name;
+        for (int i = 0; i < 4; i++)
+        {
+            if (old._materias[i] != NULL)
+            {
+                _materias[i] = old._materias[i]->clone();
+                _floor[i] = _materias[i];
+            }
+            else
+            {
+                _materias[i] = NULL;
+                _floor[i] = NULL;
+            }
+        }
     }
     return *this;
 }
 
 Character::~Character()
 {
-    std::cout << "Character destructor" << std::endl;
+    // std::cout << "Character destructor" << std::endl;
+    for (int i = 0; i < 4; i++) 
+    {
+        delete _floor[i];
+        _floor[i] = NULL;
+    }
 }
 
 std::string const & Character::getName() const
@@ -42,6 +84,7 @@ void Character::equip(AMateria* m)
         if (_materias[i] == NULL)
         {
             _materias[i] = m;
+            _floor[i] = m;
             break;
         }
     }
@@ -49,12 +92,15 @@ void Character::equip(AMateria* m)
 
 void Character::unequip(int idx)
 {
-    AMateria *m = _materias[idx];
-    m = NULL;
+    if (idx >= 0 && idx < 4 && _materias[idx] != NULL)
+    {
+        std::cout << "\"" << _name << "\" unequips " << _materias[idx]->getType() << std::endl;
+        _materias[idx] = NULL;
+    }
 }
 
 void Character::use(int idx, ICharacter& target)
 {
-    AMateria *m = _materias[idx];
-    m->use(target);
+    if (_materias[idx] != NULL && idx >= 0 && idx < 4)
+        _materias[idx]->use(target);
 }

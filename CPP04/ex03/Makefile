@@ -13,7 +13,7 @@
 NAME = ex03
 CFLAGS = -Wall -Wextra -Werror -g -std=c++98
 
-SCRS = main.cpp AMateria.cpp Character.cpp Cure.cpp Ice.cpp MateriaSource.cpp ICharacter.cpp IMateriaSource.cpp
+SCRS = main.cpp AMateria.cpp Character.cpp Cure.cpp Ice.cpp MateriaSource.cpp
 OBJS = $(SCRS:.cpp=.o)
 
 all: $(NAME)

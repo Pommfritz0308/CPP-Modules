@@ -2,17 +2,22 @@
 
 AMateria::AMateria()
 {
-    std::cout << "AMateria default constructor" << std::endl;
+    // std::cout << "AMateria default constructor" << std::endl;
+}
+
+AMateria::AMateria(std::string const & type) : _type(type)
+{
+    // std::cout << "AMateria constructor" << std::endl;
 }
 
 AMateria::AMateria(const AMateria &old) : _type(old._type)
 {
-    std::cout << "AMateria copy constructor" << std::endl;
+    // std::cout << "AMateria copy constructor" << std::endl;
 }
 
 AMateria& AMateria::operator= (const AMateria &old)
 {
-    std::cout << "AMateria assignation operator" << std::endl;
+    // std::cout << "AMateria assignation operator" << std::endl;
     if (this != &old)
     {
         _type = old._type;
@@ -22,17 +27,12 @@ AMateria& AMateria::operator= (const AMateria &old)
 
 AMateria::~AMateria()
 {
-    std::cout << "AMateria destructor" << std::endl;
+    // std::cout << "AMateria destructor" << std::endl;
 }
 
 std::string const & AMateria::getType() const
 {
     return (_type);
-}
-
-AMateria* AMateria::clone() const
-{
-    return ;
 }
 
 void AMateria::use(ICharacter& target)

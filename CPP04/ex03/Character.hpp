@@ -8,6 +8,7 @@ class Character : public ICharacter
 
         std::string _name;
         AMateria* _materias[4];
+        AMateria* _floor[4];
 
     public:
     
