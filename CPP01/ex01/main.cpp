@@ -24,6 +24,10 @@ int	main (int argc, char **argv)
 		std::cerr << "Error: zombieHorde returned NULL" << std::endl;
 		return (1);
 	}
+	for (int i = 0; i < n; i++)
+	{
+		horde[i].announce();
+	}
 	delete [] horde;
 	return (0);
 }

@@ -10,6 +10,7 @@ int main()
     src->learnMateria(new Cure());
     Character *me = new Character("me");
     AMateria* tmp;
+    tmp = src->createMateria("false"); // should not be created
     tmp = src->createMateria("ice");
     me->equip(tmp);
     tmp = src->createMateria("cure");
@@ -21,7 +22,6 @@ int main()
     tmp = src->createMateria("cure"); // should not be created
     me->equip(tmp);
     delete tmp;
-    // tmp = src->createMateria("false"); // should not be created
     ICharacter *copy = new Character(*me); // copy constructor
     Character *assigned = new Character("assigned");
     *assigned = *me; // assignation operator
@@ -48,6 +48,8 @@ int main()
     std::cout << std::endl << "assigned (type:" << assigned->getName() << "): " << std::endl;
     assigned->use(0, *bob);
     assigned->use(1, *bob);
+    assigned->use(2, *bob);
+    assigned->use(3, *bob);
     std::cout << std::endl;
     delete bob;
     delete me;

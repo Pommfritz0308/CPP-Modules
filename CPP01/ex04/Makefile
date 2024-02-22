@@ -27,6 +27,7 @@ $(NAME): $(OBJS)
 
 clean:
 	@rm -f $(OBJS)
+	@rm -f *.replace
 
 fclean: clean
 	@rm -f $(NAME)

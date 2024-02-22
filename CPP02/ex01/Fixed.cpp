@@ -53,12 +53,12 @@ void Fixed::setRawBits(int const raw)
 
 float Fixed::toFloat( void ) const
 {
-	return static_cast<float>(value) / (1 << bits);
+	return static_cast<float>(value) / (1 << bits); // least significant bits become the decimal part
 }
 
 int Fixed::toInt( void ) const
 {
-	return (value >> bits);
+	return (value >> bits); // least significant bits are removed
 }
 
 std::ostream& operator<<(std::ostream& os, const Fixed& obj)
