@@ -31,12 +31,20 @@ class AForm
 			public:
 				virtual const char* what() const throw();
 		};
+		
+		class FormNotSignedException : public std::exception
+		{
+			public:
+				virtual const char* what() const throw();
+		};
 
 		std::string getName() const;
 		bool getSigned() const;
 		int getGradeToSign() const;
 		int getGradeToExecute() const;
-		virtual void beSigned(Bureaucrat &b) = 0;
+		void beSigned(Bureaucrat &b);
+		void execute(Bureaucrat const & executor) const;
+		virtual void action() const = 0;
 
 	private:
 		const std::string _name;
@@ -44,5 +52,7 @@ class AForm
 		const int _gradeToExecute;
 		bool _signed;
 };
+
+std::ostream& operator<<(std::ostream& os, const AForm& f);
 
 #endif

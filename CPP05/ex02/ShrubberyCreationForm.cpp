@@ -28,3 +28,27 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 {
 	std::cout << "ShrubberyCreationForm destructor called" << std::endl;
 }
+
+void ShrubberyCreationForm::action() const
+{
+	std::ofstream file;
+	std::string newFile = std::string(getName()) + "_shrubbery";
+	file.open(newFile.c_str());
+	if (file.is_open())
+	{
+		file << "      /\\      " << std::endl;
+		file << "     /\\*\\     " << std::endl;
+		file << "    /\\O\\*\\    " << std::endl;
+		file << "   /*/\\/\\/\\   " << std::endl;
+		file << "  /\\O\\/\\*\\/\\  " << std::endl;
+		file << " /\\*\\/\\*\\/\\/\\ " << std::endl;
+		file << "/\\O\\/\\/*/\\/O/\\" << std::endl;
+		file << "      ||      " << std::endl;
+		file << "      ||      " << std::endl;
+		file << "      ||      " << std::endl;
+		file << std::endl;
+		file.close();
+	}
+	else
+		std::cout << "Error: could not open file" << std::endl;
+}

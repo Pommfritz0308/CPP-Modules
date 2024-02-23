@@ -74,10 +74,26 @@ void Bureaucrat::decrementGrade()
 	_grade++;
 }
 
-void Bureaucrat::signForm(Form &f)
+void Bureaucrat::signForm(AForm &f)
 {
 	if (f.getSigned())
 		std::cout << "Bureaucrat \"" << _name << "\" signed " << f.getName() << std::endl;
 	else
 		std::cout << "Bureaucrat \"" << _name << "\" couldn't sign " << f.getName() << " because the grade was too low" << std::endl;
+}
+
+void Bureaucrat::executeForm(AForm const & form)
+{
+	if (form.getSigned())
+	{
+		if (_grade <= form.getGradeToExecute())
+		{
+			std::cout << _name << " executes " << form.getName() << std::endl;
+			form.action();
+		}
+		else
+			std::cout << _name << " couldn't execute " << form.getName() << " because the grade was too low" << std::endl;
+	}
+	else
+		std::cout << _name << " couldn't execute " << form.getName() << " because the form is not signed" << std::endl;
 }

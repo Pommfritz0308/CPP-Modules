@@ -28,3 +28,12 @@ RobotomyRequestForm::~RobotomyRequestForm()
 {
 	std::cout << "RobotomyRequestForm destructor called" << std::endl;
 }
+
+void RobotomyRequestForm::action() const
+{
+	std::cout << "Bzzzzzz...Brrrrr" << std::endl;
+	if (rand() % 2)
+		std::cout << AForm::getName() << " has been robotomized" << std::endl;
+	else
+		std::cout << AForm::getName() << " robotomization failed" << std::endl;
+}

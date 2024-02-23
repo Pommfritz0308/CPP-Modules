@@ -7,9 +7,9 @@
 # include <iomanip>
 # include <cmath>
 # include <limits>
-# include "Form.hpp"
+# include "AForm.hpp"
 
-class Form;
+class AForm;
 
 class Bureaucrat
 {
@@ -36,7 +36,8 @@ class Bureaucrat
 		int getGrade() const;
 		void incrementGrade();
 		void decrementGrade();
-		void signForm(Form &f);
+		void signForm(AForm &f);
+		void executeForm(AForm const & form);
 
 	private:
 		const std::string _name;

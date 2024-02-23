@@ -28,3 +28,8 @@ PresidentialPardonForm::~PresidentialPardonForm()
 {
 	std::cout << "PresidentialPardonForm destructor called" << std::endl;
 }
+
+void PresidentialPardonForm::action() const
+{
+	std::cout << AForm::getName() << " has been pardoned by Zafod Beeblebrox" << std::endl;
+}

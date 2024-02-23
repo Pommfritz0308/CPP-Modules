@@ -10,6 +10,8 @@ class PresidentialPardonForm : public AForm
 		PresidentialPardonForm(const PresidentialPardonForm &old);
 		PresidentialPardonForm& operator=(const PresidentialPardonForm& old);
 		~PresidentialPardonForm();
+		void execute(Bureaucrat const & executor) const;
+		void action() const;
 };
 
 #endif
