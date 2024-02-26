@@ -31,9 +31,9 @@ RobotomyRequestForm::~RobotomyRequestForm()
 
 void RobotomyRequestForm::action() const
 {
-	std::cout << "Bzzzzzz...Brrrrr" << std::endl;
+	std::cout << YBOLD("Bzzzzzz...Brrrrr") << std::endl;
 	if (rand() % 2)
-		std::cout << AForm::getName() << " has been robotomized" << std::endl;
+		std::cout << YBOLD(AForm::getName()) << YBOLD(" has been robotomized") << std::endl;
 	else
-		std::cout << AForm::getName() << " robotomization failed" << std::endl;
+		std::cout << RBOLD(AForm::getName()) << RBOLD(" robotomization failed") << std::endl;
 }

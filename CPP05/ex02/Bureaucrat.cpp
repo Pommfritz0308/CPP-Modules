@@ -88,12 +88,12 @@ void Bureaucrat::executeForm(AForm const & form)
 	{
 		if (_grade <= form.getGradeToExecute())
 		{
-			std::cout << _name << " executes " << form.getName() << std::endl;
+			std::cout << GBOLD(_name) << GBOLD(" executes ") << GBOLD(form.getName()) << std::endl;
 			form.action();
 		}
 		else
-			std::cout << _name << " couldn't execute " << form.getName() << " because the grade was too low" << std::endl;
+			std::cout << RBOLD(_name) << RBOLD(" couldn't execute ") << RBOLD(form.getName()) << RBOLD(" because the grade was too low") << std::endl;
 	}
 	else
-		std::cout << _name << " couldn't execute " << form.getName() << " because the form is not signed" << std::endl;
+		std::cout << RBOLD(_name) << RBOLD(" couldn't execute ") << RBOLD(form.getName()) << RBOLD(" because the form is not signed") << std::endl;
 }

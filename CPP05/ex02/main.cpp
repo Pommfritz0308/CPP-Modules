@@ -30,7 +30,8 @@ int main (void)
     }
     catch (std::exception &e)
     {
-        std::cout << e.what() << std::endl;
+        std::cout << RBOLD(f0->getName()) << RBOLD(" cannot sign...") << std::endl;
+        std::cout << RBOLD(e.what()) << std::endl;
     }
     try{
         std::cout << *f1;
@@ -38,7 +39,8 @@ int main (void)
     }
     catch (std::exception &e)
     {
-        std::cout << e.what() << std::endl;
+        std::cout << RBOLD(f1->getName()) << RBOLD(" cannot sign...") << std::endl;
+        std::cout << RBOLD(e.what()) << std::endl;
     }
     try{
         std::cout << *f2;
@@ -46,20 +48,20 @@ int main (void)
     }
     catch (std::exception &e)
     {
-        std::cout << e.what() << std::endl;
+        std::cout << RBOLD(f2->getName()) << RBOLD(" cannot sign...") << std::endl;
+        std::cout << RBOLD(e.what()) << std::endl;
     }
 
     b0->executeForm(*f0);
     b1->executeForm(*f1);
     b2->executeForm(*f2);
-
     try
     {
         f0->execute(*b0);
     }
     catch(const std::exception& e)
     {
-        std::cerr << e.what() << '\n';
+        std::cout << e.what() << '\n';
     }
     try
     {
@@ -67,7 +69,7 @@ int main (void)
     }
     catch(const std::exception& e)
     {
-        std::cerr << e.what() << '\n';
+        std::cout << e.what() << '\n';
     }
 
     try
@@ -76,7 +78,7 @@ int main (void)
     }
     catch(const std::exception& e)
     {
-        std::cerr << e.what() << '\n';
+        std::cout << e.what() << '\n';
     }
 
     delete b0;
