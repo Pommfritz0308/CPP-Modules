@@ -1,16 +1,16 @@
 #include "PresidentialPardonForm.hpp"
 
-PresidentialPardonForm::PresidentialPardonForm() : AForm("default", 25, 5)
+PresidentialPardonForm::PresidentialPardonForm() : Form("default", 25, 5)
 {
 	std::cout << "PresidentialPardonForm default constructor called" << std::endl;
 }
 
-PresidentialPardonForm::PresidentialPardonForm(std::string target) : AForm(target, 25, 5)
+PresidentialPardonForm::PresidentialPardonForm(std::string target) : Form(target, 25, 5)
 {
 	std::cout << "PresidentialPardonForm constructor called" << std::endl;
 }
 
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &old) : AForm(old)
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &old) : Form(old)
 {
 	std::cout << "PresidentialPardonForm copy constructor called" << std::endl;
 }
@@ -19,7 +19,7 @@ PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPard
 {
 	if (this != &old)
 	{
-		AForm::operator=(old);
+		Form::operator=(old);
 	}
 	return *this;
 }
@@ -31,5 +31,5 @@ PresidentialPardonForm::~PresidentialPardonForm()
 
 void PresidentialPardonForm::action() const
 {
-	std::cout << YBOLD(AForm::getName()) << YBOLD(" has been pardoned by Zafod Beeblebrox") << std::endl;
+	std::cout << YBOLD(Form::getName()) << YBOLD(" has been pardoned by Zafod Beeblebrox") << std::endl;
 }

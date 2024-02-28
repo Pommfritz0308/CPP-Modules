@@ -17,7 +17,7 @@ static Bureaucrat* createAndPrintBureaucrat(const std::string& name, int grade) 
 int main (void)
 {
     Bureaucrat *b0 = createAndPrintBureaucrat("b0", 1);
-    Bureaucrat *b1 = createAndPrintBureaucrat("b1", 150);
+    Bureaucrat *b1 = createAndPrintBureaucrat("b1", 5);
     Bureaucrat *b2 = createAndPrintBureaucrat("b2", 6);
 
     AForm *f0 = new ShrubberyCreationForm("f0");
@@ -52,16 +52,19 @@ int main (void)
         std::cout << RBOLD(e.what()) << std::endl;
     }
 
+    std::cout << BOLD("\nTESTING BUREAUCRAT EXECUTE FORM:") << std::endl;
     b0->executeForm(*f0);
     b1->executeForm(*f1);
     b2->executeForm(*f2);
+
+    std::cout << BOLD("\nTESTING EXECUTE FORM:") << std::endl;
     try
     {
         f0->execute(*b0);
     }
     catch(const std::exception& e)
     {
-        std::cout << e.what() << '\n';
+        std::cout << RBOLD(e.what()) << '\n';
     }
     try
     {
@@ -69,7 +72,7 @@ int main (void)
     }
     catch(const std::exception& e)
     {
-        std::cout << e.what() << '\n';
+        std::cout << RBOLD(e.what()) << '\n';
     }
 
     try
@@ -78,7 +81,7 @@ int main (void)
     }
     catch(const std::exception& e)
     {
-        std::cout << e.what() << '\n';
+        std::cout << RBOLD(e.what()) << '\n';
     }
 
     delete b0;
