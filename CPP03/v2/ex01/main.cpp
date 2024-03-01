@@ -6,7 +6,7 @@ int main ()
 
     a.attack("Zombie");
     a.takeDamage(80);
-    a.beRepaired(50);
+    a.beRepaired(120);
     a.guardGate();
 
     ScavTrap b (a);

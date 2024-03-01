@@ -83,17 +83,21 @@ void ClapTrap::beRepaired(unsigned int amount)
 {
 	if (hitPoints && energyPoints)
 	{
-		for (unsigned int i = 0; i < amount && i + hitPoints < maxHitPoints; i++)
+		if (!dead && hitPoints + amount > maxHitPoints)
 		{
-			std::cout << "ClapTrap " << name << " repaired " << amount << " points of health!\n";	
-			energyPoints--;
-			hitPoints++;
-		}
-		if (hitPoints == maxHitPoints)
+			std::cout << "ClapTrap " << name << " repaired " << maxHitPoints - hitPoints << " hit points!\n";
 			std::cout << "ClapTrap " << name << " is at full health!\n";
+			hitPoints = maxHitPoints;
+		}
+		else if (!dead)
+		{
+			std::cout << "ClapTrap " << name << " repaired " << amount << " hit points!\n";
+			hitPoints += amount;
+		}
 	}
 	else
 		std::cout << "ClapTrap " << name << " can't repair itself.\n";
 }
+
 
 

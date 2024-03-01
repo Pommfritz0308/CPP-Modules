@@ -7,6 +7,9 @@ int main ()
     DiamondTrap a ("Freddy");
 
     a.attack("Zombie");
-    a.takeDamage(120);
+    a.takeDamage(80);
+    a.beRepaired(100);
+    a.guardGate();
+    a.highFivesGuys();
     a.whoAmI();
 }
