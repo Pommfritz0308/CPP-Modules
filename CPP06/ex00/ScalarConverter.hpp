@@ -25,11 +25,9 @@ class ScalarConverter
 		~ScalarConverter();
 
 		static void convert(std::string str);
-		static void checkType(std::string str);
-		static std::string checkChar(std::string str);
-		static std::string checkFloat(std::string str);
-		static std::string checkDouble(std::string str);
-		static std::string checkInt(std::string str);
+		static void checkChar(std::string str);
+		static void checkNumb(std::string str);
+		static int strisdigit(std::string str);
 
 	private:
 		ScalarConverter(); //private constructor = class not instanciable

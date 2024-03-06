@@ -22,7 +22,6 @@ int main()
     k->makeSound();
     std::cout << beta->getType() << ": ";
     beta->makeSound();
-    std::cout << std::endl;
     delete beta;
     delete meta;
     delete k;

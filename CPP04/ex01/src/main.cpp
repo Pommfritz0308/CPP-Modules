@@ -42,9 +42,13 @@ int main()
     std::cout << std::endl;
     std::cout << "Catty: ";
     catty->printIdeas();
-    // Test assignation operator for unique brain array
+    std::cout << "\n";
+
+    std::cout << BOLD("TESTING ASSIGNATION OPERATOR\n");
     *cat = *catty;
+    std::cout << "Cat: ";
     cat->printIdeas();
+    std::cout << "Catty: ";
     catty->printIdeas();
     delete catty;
     delete cat;
