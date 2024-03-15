@@ -85,7 +85,8 @@ void ScalarConverter::toChar(std::string str)
 
 void ScalarConverter::toInt(std::string str)
 {
-	int i = atoi(str.c_str()); //conversion to int
+	errno = 0;
+	int i = std::atoi(str.c_str()); //conversion to int
 	if (errno == ERANGE)
 	{
 		std::cout << "char: impossible\n";
@@ -107,6 +108,7 @@ void ScalarConverter::toInt(std::string str)
 
 void ScalarConverter::toFloat(std::string str)
 {
+	errno = 0;
 	float f = strtof(str.c_str(), NULL); //conversion to float
 	if (errno == ERANGE || std::isnan(f) || std::isinf(f) || -std::isinf(f)) //check for nanf and inff
 	{
@@ -134,6 +136,7 @@ void ScalarConverter::toFloat(std::string str)
 
 void ScalarConverter::toDouble(std::string str)
 {
+	errno = 0;
 	double d = strtod(str.c_str(), NULL); //conversion to double
 	if (errno == ERANGE || std::isnan(d) || std::isinf(d) || -std::isinf(d)) // check for nan and inf
 	{
