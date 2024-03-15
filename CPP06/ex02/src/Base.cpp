@@ -22,11 +22,14 @@ Base* Base::generate(void)
 
 void Base::identify(Base* p)
 {
-    if (dynamic_cast<Base*>(p) == dynamic_cast<A*>(p))
+    //Dynamic cast returns NULL if cast fails which means the source is of different type
+    if (p == NULL)
+        std::cout << "Target is NULL\n";
+    else if (dynamic_cast<A*>(p))
         std::cout << "Type is A\n";
-    else if (dynamic_cast<Base*>(p) == dynamic_cast<B*>(p))
+    else if (dynamic_cast<B*>(p))
         std::cout << "Type is B\n";
-    else if (dynamic_cast<Base*>(p) == dynamic_cast<C*>(p))
+    else if (dynamic_cast<C*>(p))
         std::cout << "Type is C\n";
     else
         std::cout << "Bad cast\n";
@@ -34,12 +37,30 @@ void Base::identify(Base* p)
 
 void Base::identify(Base& p)
 {
-    if (dynamic_cast<Base&>(p) == dynamic_cast<A&>(p))
+    //Dynamic cast to reference requires a try/catch block to check
+    //type as reference cannot be NULL
+    try
+    {
+        A& a = dynamic_cast<A&>(p);
+        (void)a;
         std::cout << "Type is A\n";
-    else if (dynamic_cast<Base&>(p) == dynamic_cast<B&>(p))
+    }
+    catch (...)
+    {}
+    try
+    {
+        B& b = dynamic_cast<B&>(p);
+        (void)b;
         std::cout << "Type is B\n";
-    else if (dynamic_cast<Base&>(p) == dynamic_cast<C&>(p))
+    }
+    catch (...)
+    {}
+    try
+    {
+        C& c = dynamic_cast<C&>(p);
+        (void)c;
         std::cout << "Type is C\n";
-    else
-        std::cout << "Bad cast\n";
+    }
+    catch (...)
+    {}
 }
