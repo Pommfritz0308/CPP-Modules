@@ -1,23 +1,26 @@
-#include "iter.hpp"
-
-void print_str(std::string &s)
-{
-	std::cout << s << std::endl;
-}
-
-void print_int(int &i)
-{
-    std::cout << i << std::endl;
-}
+#include "Array.hpp"
 
 int main( void )
 {
-    std::string a[] = {"hello world!", "this is a test",
-        "this is a test", "this is a test", "this is a test"};
-    int b[] = {1, 2, 3, 4, 5};
-    std::cout << GBOLD("Printing strings") << std::endl;
-    iter(a, 5, print_str);
-    std::cout << GBOLD("Printing integers") << std::endl;
-    iter(b, 5, print_int);
-    return 0;
+    Array<int> numbers(5);
+    Array<std::string> strings(5);
+
+    for (unsigned int i = 0; i < numbers.size(); i++)
+    {
+        numbers[i] = i;
+        strings[i] = "Test";
+    }
+    try
+    {
+        for (unsigned int i = 0; i < numbers.size(); i++)
+        {
+            std::cout << "numbers[" << i << "] = " << numbers[i] << std::endl;
+            std::cout << "strings[" << i << "] = " << strings[i] << std::endl;
+        }
+        std::cout << "numbers[5] = " << numbers[5] << std::endl;
+    }
+    catch(const std::out_of_range& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
 }

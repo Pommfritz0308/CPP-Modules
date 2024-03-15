@@ -17,18 +17,25 @@
 # define YBOLD(x) "\x1B[1m" + std::string(KYEL) + x + RST
 # define BOLD(x) "\x1B[1m" << x << RST
 
-template <class T>
+template <typename T>
 
 class Array
 {
     private:
+
         T *_array;
         unsigned int _size;
+
     public:
         Array();
         Array(unsigned int n);
         Array(Array const &src);
         ~Array();
+    
+        unsigned int size() const;
+
+        T& operator[](size_t index);
+        const T& operator[](size_t index) const;
 };
 
 #include "Array.tpp"
