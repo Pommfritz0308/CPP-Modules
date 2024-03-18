@@ -2,6 +2,7 @@
 
 static void createAndPrintBureaucrat(const std::string& name, int grade) {
     try {
+        std::cout << GBOLD("Creating Bureaucrat ") << GBOLD(name) << GBOLD(" with grade ") << grade << std::endl;
         Bureaucrat b(name, grade);
         std::cout << b;
     } catch (std::exception &e) {
@@ -16,9 +17,10 @@ int main(void)
     createAndPrintBureaucrat("b2", 151);
     try
     {
-        Bureaucrat b5("b5", 1);
-        b5.incrementGrade();
-        std::cout << b5;
+        std::cout << GBOLD("Creating Bureaucrat b3 with grade 1 and incrementing it") << std::endl;
+        Bureaucrat b3("b3", 1);
+        b3.incrementGrade();
+        std::cout << b3;
     }
     catch (std::exception &e)
     {

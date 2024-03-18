@@ -35,6 +35,7 @@ int main(void)
     catch (std::exception &e)
     {
         std::cout << e.what() << std::endl;
+        std::cout << *f0;
     }
     b0->signForm(*f0);
 
@@ -48,6 +49,7 @@ int main(void)
     catch (std::exception &e)
     {
         std::cout << e.what() << std::endl;
+        std::cout << *f1;
     }
     b1->signForm(*f1);
     delete b0;

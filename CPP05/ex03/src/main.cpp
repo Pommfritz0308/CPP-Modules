@@ -20,7 +20,7 @@ int main (void)
     }
     catch (std::exception &e)
     {
-        std::cerr << e.what() << std::endl;
+        std::cerr << RBOLD(e.what()) << std::endl;
     }
     try{
         ppf = someRandomIntern.makeForm("presidential pardon request", "Bender");
@@ -29,7 +29,7 @@ int main (void)
     }
     catch (std::exception &e)
     {
-        std::cerr << e.what() << std::endl;
+        std::cerr << RBOLD(e.what()) << std::endl;
     }
     try{
         scf = someRandomIntern.makeForm("shrubbery creation request", "Bender");
@@ -37,7 +37,7 @@ int main (void)
     }
     catch (std::exception &e)
     {
-        std::cerr << e.what() << std::endl;
+        std::cerr << RBOLD(e.what()) << std::endl;
     }
     try{
         f = someRandomIntern.makeForm("random request", "Bender");
@@ -45,18 +45,39 @@ int main (void)
     }
     catch (std::exception &e)
     {
-        std::cerr << e.what() << std::endl;
+        std::cerr << RBOLD(e.what()) << std::endl;
     }
 
     std::cout << BOLD("\nTEST: EXECUTE FORMS") << std::endl;
-    Bureaucrat b("B0", 1);
-    ppf->beSigned(b);
-    ppf->execute(b);
-    scf->beSigned(b);
-    scf->execute(b);
-    rf->beSigned(b);
-    rf->execute(b);
+    Bureaucrat b("B0", 7);
+    try{
+        rf->beSigned(b);
+        std::cout << *rf;
+        rf->execute(b);
+    }
+    catch (std::exception &e)
+    {
+        std::cerr << RBOLD(e.what()) << std::endl;
+    }
+    try{
+        ppf->beSigned(b);
+        std::cout << *ppf;
+        ppf->execute(b);
+    }
+    catch (std::exception &e)
+    {
+        std::cerr << RBOLD(e.what()) << std::endl;
+    }
+    try{
+        scf->beSigned(b);
+        std::cout << *scf;
+        scf->execute(b);
+    }
+    catch (std::exception &e)
+    {
+        std::cerr << RBOLD(e.what()) << std::endl;
+    }
     delete rf;
-    delete scf;
     delete ppf;
+    delete scf;
 }

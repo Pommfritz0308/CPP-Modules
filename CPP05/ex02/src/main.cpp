@@ -27,6 +27,7 @@ int main (void)
     try{
         std::cout << *f0;
         f0->beSigned(*b0);
+        std::cout << *f0;
     }
     catch (std::exception &e)
     {
@@ -36,6 +37,7 @@ int main (void)
     try{
         std::cout << *f1;
         f1->beSigned(*b1);
+        std::cout << *f1;
     }
     catch (std::exception &e)
     {
@@ -45,6 +47,7 @@ int main (void)
     try{
         std::cout << *f2;
         f2->beSigned(*b2);
+        std::cout << *f2;
     }
     catch (std::exception &e)
     {

@@ -7,7 +7,7 @@
 # include <iomanip>
 # include <cmath>
 # include <limits>
-# include "AForm.hpp"
+# include "Form.hpp"
 # define RST  "\x1B[0m"
 # define KRED  "\x1B[31m"
 # define KGRN  "\x1B[32m"
@@ -16,8 +16,9 @@
 # define RBOLD(x) "\x1B[1m" + std::string(KRED) + x + RST
 # define YBOLD(x) "\x1B[1m" + std::string(KYEL) + x + RST
 # define BOLD(x) "\x1B[1m" << x << RST
+# define BOOL_TO_STRING(b) ((b) ? "signed" : "unsigned")
 
-class AForm;
+class Form;
 
 class Bureaucrat
 {
@@ -44,8 +45,7 @@ class Bureaucrat
 		int getGrade() const;
 		void incrementGrade();
 		void decrementGrade();
-		void signForm(AForm &f);
-		void executeForm(AForm const & form);
+		void signForm(Form &f);
 
 	private:
 		const std::string _name;
