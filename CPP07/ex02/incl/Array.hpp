@@ -8,6 +8,7 @@
 # include <cmath>
 # include <limits>
 # include <cerrno>
+# include <sstream>
 # define RST  "\x1B[0m"
 # define KRED  "\x1B[31m"
 # define KGRN  "\x1B[32m"
@@ -30,6 +31,7 @@ class Array
         Array();
         Array(unsigned int n);
         Array(Array const &src);
+        Array& operator=(const Array &src);
         ~Array();
     
         unsigned int size() const;
