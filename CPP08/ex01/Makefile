@@ -1,4 +1,4 @@
-NAME = ex01
+NAME = ex02
 CXXFLAGS = -Wall -Wextra -Werror -g -std=c++98 -Iincl
 
 SCRS = $(wildcard src/*.cpp)

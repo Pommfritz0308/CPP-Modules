@@ -1,4 +1,4 @@
-NAME = ex03
+NAME = ex01
 CXXFLAGS = -Wall -Wextra -Werror -g -std=c++98 -Iincl
 
 SCRS = $(wildcard src/*.cpp)
@@ -17,7 +17,6 @@ objs/%.o: src/%.cpp
 clean:
 	@rm -f $(OBJS)
 	@rm -rf objs
-	@rm -f *shrubbery
 
 fclean: clean
 	@rm -f $(NAME)
