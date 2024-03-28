@@ -1,9 +1,9 @@
 #ifndef EASYFIND_HPP
 #define EASYFIND_HPP
-#include <iostream>
-#include <exception>
-#include <algorithm>
-#include <vector>
+# include <iostream>
+# include <exception>
+# include <algorithm>
+# include <vector>
 # define RST  "\x1B[0m"
 # define KRED  "\x1B[31m"
 # define KGRN  "\x1B[32m"

@@ -2,6 +2,7 @@
 
 int main (void)
 {
+    std::cout << BOLD("Testing MutantStack") << std::endl;
     MutantStack<int> mstack;
     mstack.push(5);
     mstack.push(17);
@@ -22,6 +23,31 @@ int main (void)
     {
         std::cout << "\t| " << *it << std::endl;
         ++it;
+    }
+    std::cout << "\tv\nTop\n";
+    std::cout << std::endl;
+
+    std::cout << BOLD("Comparing with std::list behaviour") << std::endl;
+    std::list<int> list;
+    list.push_back(5);
+    list.push_back(17);
+    std::cout << list.back() << std::endl;
+    list.pop_back();
+    std::cout << list.size() << std::endl;
+    list.push_back(3);
+    list.push_back(5);
+    list.push_back(737);
+    list.push_back(0);
+    std::list<int>::iterator it2 = list.begin();
+    std::list<int>::iterator ite2 = list.end();
+    ++it2;
+    --it2;
+    std::cout << "---------------------\nElements:\n";
+    std::cout << "Bottom\n\t^\n";
+    while (it2 != ite2)
+    {
+        std::cout << "\t| " << *it2 << std::endl;
+        ++it2;
     }
     std::cout << "\tv\nTop\n";
     std::cout << std::endl;

@@ -22,7 +22,7 @@ void Harl::warning( void )
 
 void Harl::complain( std::string level )
 {
-	t_function functions[4] = {{"debug", &Harl::debug}, {"error", &Harl::error}, {"info", &Harl::info}, {"warning", &Harl::warning}}; // declaring array of structs
+	t_function functions[] = {{"debug", &Harl::debug}, {"error", &Harl::error}, {"info", &Harl::info}, {"warning", &Harl::warning}}; // declaring array of structs
 	for (int i = 0; i < 4; i++) // loop through array of function pointers
 	{
 		if (functions[i].level == level)

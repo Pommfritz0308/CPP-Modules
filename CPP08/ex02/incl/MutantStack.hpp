@@ -1,11 +1,12 @@
 #ifndef MUTANT_STACK_HPP
 #define MUTANT_STACK_HPP
-#include <iostream>
-#include <exception>
-#include <algorithm>
-#include <vector>
-#include <deque>
-#include <stack>
+# include <iostream>
+# include <exception>
+# include <algorithm>
+# include <vector>
+# include <deque>
+# include <stack>
+# include <list>
 # define RST  "\x1B[0m"
 # define KRED  "\x1B[31m"
 # define KGRN  "\x1B[32m"
