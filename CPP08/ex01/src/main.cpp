@@ -19,18 +19,6 @@ int main (void)
     {
         std::cerr << RBOLD(e.what()) << '\n';
     }
-
-    std::cout << BOLD("TESTING COPY CONSTRUCTOR\n");
-    Span sp2 = sp;
-    try
-    {
-        std::cout << "Address of sp vector: " << &sp.getBuff() << std::endl;
-        std::cout << "Address of sp2 vector: " << &sp2.getBuff() << std::endl << std::endl;
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << RBOLD(e.what()) << '\n';
-    }
     
     std::cout << BOLD("TEST WITH SIZE 10000\n");
     Span big = Span(10000);
@@ -46,6 +34,18 @@ int main (void)
         std::cout << "Shortest span is: " << big.shortestSpan() << std::endl;
         std::cout << "Longest span is: " << big.longestSpan() << std::endl;
 
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << RBOLD(e.what()) << '\n';
+    }
+
+    std::cout << BOLD("\nTESTING COPY CONSTRUCTOR\n");
+    Span sp2 = sp;
+    try
+    {
+        std::cout << "Address of sp vector: " << &sp.getBuff() << std::endl;
+        std::cout << "Address of sp2 vector: " << &sp2.getBuff() << std::endl << std::endl;
     }
     catch(const std::exception& e)
     {

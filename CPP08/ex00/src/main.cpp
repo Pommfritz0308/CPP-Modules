@@ -7,13 +7,17 @@ int main (void)
     {
         container.push_back(i);
     }
+    int n = 5;
     try{
-        easyfind(container, 5);
-        std::cout << GBOLD("Value found") << std::endl;
+            easyfind(container, n);
+            std::cout << GBOLD("Value ") << container[n] << GBOLD(" found") << std::endl;
+            n = -1;
+            easyfind(container, n);
+            std::cout << GBOLD("Value ") << container[n] << GBOLD(" found") << std::endl;
     }
     catch(std::exception &e)
     {
-        std::cout << RBOLD("Value not found") << std::endl;
+        std::cout << RBOLD("Value ") << n << RBOLD(" not found") << std::endl;
     }
     return (0);
 }
