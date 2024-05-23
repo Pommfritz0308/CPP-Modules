@@ -10,6 +10,11 @@
 # include <cmath>
 # include <limits>
 # include <vector>
+# include <fstream>
+# include <sstream>
+# include <ctime>
+# include <map>
+# include <cstdio>
 # define RST  "\x1B[0m"
 # define KRED  "\x1B[31m"
 # define KGRN  "\x1B[32m"
@@ -23,11 +28,12 @@ class BitcoinExchange
 {
     public:
 
-        BitcoinExchange();
-        BitcoinExchange(const BitcoinExchange& src);
-        BitcoinExchange& operator=(const BitcoinExchange& src);
-        ~BitcoinExchange();
-        std::ostream& open_database(const std::string& filename);
+        // BitcoinExchange();
+        // BitcoinExchange(const BitcoinExchange& src);
+        // BitcoinExchange& operator=(const BitcoinExchange& src);
+        // ~BitcoinExchange();
+        void loadDatabase(const std::string& filename);
+        struct tm isValidDate(const std::string& date);
 };
 
 #endif
