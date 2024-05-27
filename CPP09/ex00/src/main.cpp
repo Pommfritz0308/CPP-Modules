@@ -8,5 +8,13 @@ int main (int argc, char **argv)
         return 1;
     }
     BitcoinExchange exchange;
-    exchange.loadDatabase(argv[1]);
+    try
+    {
+        exchange.loadDatabase();
+        exchange.loadInput(argv[1]);
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
 }

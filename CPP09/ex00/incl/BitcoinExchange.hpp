@@ -32,8 +32,14 @@ class BitcoinExchange
         // BitcoinExchange(const BitcoinExchange& src);
         // BitcoinExchange& operator=(const BitcoinExchange& src);
         // ~BitcoinExchange();
-        void loadDatabase(const std::string& filename);
-        struct tm isValidDate(const std::string& date);
+        void loadDatabase(void);
+        void loadInput(const std::string& filename);
+        std::map<size_t, double> getPrices() const;
+
+    private:
+        size_t DateToSizeT(const std::string& date);
+        std::map<size_t, double> prices;
+        std::map<size_t, double> input;
 };
 
 #endif
