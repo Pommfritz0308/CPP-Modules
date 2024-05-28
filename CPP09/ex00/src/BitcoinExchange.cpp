@@ -42,7 +42,7 @@ void BitcoinExchange::loadDatabase(void)
         std::stringstream ss(price);
         double priceValue;
         ss >> priceValue;
-        if (ss.fail() || !ss.eof())
+        if (ss.fail() || !ss.eof() || priceValue < 0)
         {
             throw std::runtime_error("Error: invalid price format.");
         }
@@ -80,7 +80,9 @@ void BitcoinExchange::compareInput(const std::string& filename)
             std::stringstream ss(value);
             double exchangeValue;
             ss >> exchangeValue;
-            if (std::numeric_limits<int>::max() < exchangeValue)
+            if (ss.fail() || !ss.eof())
+                std::cout << "Error: invalid exchange value => " << value << std::endl;
+            else if (std::numeric_limits<int>::max() < exchangeValue)
                 std::cout << "Error: too large a number." << std::endl;
             else if (exchangeValue < 0)
                 std::cout << "Error: not a positive number." << std::endl;
