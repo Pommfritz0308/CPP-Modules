@@ -15,6 +15,7 @@
 # include <ctime>
 # include <map>
 # include <cstdio>
+# include <cstring>
 # define RST  "\x1B[0m"
 # define KRED  "\x1B[31m"
 # define KGRN  "\x1B[32m"
@@ -33,13 +34,12 @@ class BitcoinExchange
         // BitcoinExchange& operator=(const BitcoinExchange& src);
         // ~BitcoinExchange();
         void loadDatabase(void);
-        void loadInput(const std::string& filename);
+        void compareInput(const std::string& filename);
         std::map<size_t, double> getPrices() const;
 
     private:
         size_t DateToSizeT(const std::string& date);
         std::map<size_t, double> prices;
-        std::map<size_t, double> input;
 };
 
 #endif

@@ -11,7 +11,7 @@ int main (int argc, char **argv)
     try
     {
         exchange.loadDatabase();
-        exchange.loadInput(argv[1]);
+        exchange.compareInput(argv[1]);
     }
     catch(const std::exception& e)
     {
