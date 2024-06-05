@@ -1,5 +1,5 @@
 NAME = PmergeMe
-CXXFLAGS = -Wall -Wextra -Werror -g -Iincl
+CXXFLAGS = -Wall -Wextra -Werror -g -std=c++98 -Iincl
 
 SCRS = $(wildcard src/*.cpp)
 OBJS = $(addprefix objs/, $(notdir $(SCRS:.cpp=.o)))

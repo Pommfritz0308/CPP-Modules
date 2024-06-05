@@ -2,38 +2,40 @@
 #define PMERGE_ME_HPP
 
 #include <iostream>
-#include <vector>
-#include <list>
 #include <cstdlib>
 #include <ctime>
 #include <iomanip>
 #include <algorithm>
 
+# define RST  "\x1B[0m"
+# define KRED  "\x1B[31m"
+# define KGRN  "\x1B[32m"
+# define KYEL  "\x1B[33m"
+# define GBOLD(x) "\x1B[1m" + std::string(KGRN) + x + RST
+# define RBOLD(x) "\x1B[1m" + std::string(KRED) + x + RST
+# define YBOLD(x) "\x1B[1m" + std::string(KYEL) + x + RST
+# define BOLD(x) "\x1B[1m" << x << RST
+
 class PmergeMe
 {
     public:
         PmergeMe();
-        PmergeMe(char **argv);
         PmergeMe(const PmergeMe &other);
         PmergeMe &operator=(const PmergeMe &other);
         ~PmergeMe();
 
-        void pairing(size_t start, size_t end);
-        void merge(size_t start, size_t mid, size_t end);
-        void setTime();
-        std::vector<size_t> getV() const;
-        std::list<size_t> getL() const;
+        virtual void FJ(size_t start, size_t end) = 0;
+        virtual void merge(size_t start, size_t mid, size_t end) = 0;
+        void setStart();
+        void setEnd();
+
         size_t getSize() const;
-        void printDuration() const;
+        virtual void printDuration() const = 0;
 
-    private:
-        std::vector<size_t> v;
-        std::list<size_t> l;
-        std::clock_t startTime;
+    protected:
         size_t size;
+        std::clock_t startTime;
+        std::clock_t endTime;
 };
-
-std::ostream &operator<<(std::ostream &os, const std::vector<size_t> &v);
-std::ostream &operator<<(std::ostream &os, const std::list<size_t> &l);
 
 #endif

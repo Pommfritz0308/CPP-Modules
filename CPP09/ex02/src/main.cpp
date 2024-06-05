@@ -1,4 +1,5 @@
-#include "PmergeMe.hpp"
+#include "PmergeMeVector.hpp"
+#include "PmergeMeDeque.hpp"
 
 int main(int argc, char **argv)
 {
@@ -8,9 +9,23 @@ int main(int argc, char **argv)
     }
     try
     {
-        PmergeMe p(argv + 1);
-        p.pairing(0, p.getSize());
-        std::cout << p.getV();
+        PmergeMeVector p(argv + 1);
+        std::cout << RBOLD("Before: ") << p.getV();
+        p.setStart();
+        p.FJ(0, p.getSize());
+        p.setEnd();
+        std::cout << GBOLD("After: ") << p.getV();
+        p.printDuration();
+
+        std::cout << std::endl;
+
+        PmergeMeDeque p2(argv + 1);
+        std::cout << RBOLD("Before: ") << p2.getD();
+        p2.setStart();
+        p2.FJ(0, p2.getSize());
+        p2.setEnd();
+        std::cout << GBOLD("After: ") << p2.getD();
+        p2.printDuration();
     }
     catch(const std::exception& e)
     {
