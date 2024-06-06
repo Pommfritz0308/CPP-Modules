@@ -6,6 +6,7 @@
 #include <ctime>
 #include <iomanip>
 #include <algorithm>
+#include <limits>
 
 # define RST  "\x1B[0m"
 # define KRED  "\x1B[31m"
@@ -25,7 +26,7 @@ class PmergeMe
         ~PmergeMe();
 
         virtual void FJ(size_t start, size_t end) = 0;
-        virtual void merge(size_t start, size_t mid, size_t end) = 0;
+        virtual void binaryInsertion(size_t start, size_t mid, size_t end) = 0;
         void setStart();
         void setEnd();
 

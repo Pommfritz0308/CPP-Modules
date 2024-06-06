@@ -19,13 +19,13 @@ int main(int argc, char **argv)
 
         std::cout << std::endl;
 
-        PmergeMeDeque p2(argv + 1);
-        std::cout << RBOLD("Before: ") << p2.getD();
-        p2.setStart();
-        p2.FJ(0, p2.getSize());
-        p2.setEnd();
-        std::cout << GBOLD("After: ") << p2.getD();
-        p2.printDuration();
+        // PmergeMeDeque p2(argv + 1);
+        // std::cout << RBOLD("Before: ") << p2.getD();
+        // p2.setStart();
+        // p2.FJ(0, p2.getSize());
+        // p2.setEnd();
+        // std::cout << GBOLD("After: ") << p2.getD();
+        // p2.printDuration();
     }
     catch(const std::exception& e)
     {

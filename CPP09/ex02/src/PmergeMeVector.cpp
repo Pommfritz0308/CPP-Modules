@@ -52,44 +52,55 @@ void PmergeMeVector::FJ(size_t start, size_t end)
     if (end - start < 2)
         return;
 
+    // Sorting the elements in pairs
+    size_t mid = start;
     for (size_t i = start; i < end - 1; i += 2)
     {
-        if (v[i] > v[i + 1])
+        if (v[i] < v[i + 1])
         {
-            size_t temp = v[i];
-            v[i] = v[i + 1];
-            v[i + 1] = temp;
+            std::swap(v[i], v[i + 1]);
         }
+        std::swap(v[mid++], v[i]);
     }
 
-    size_t mid = start + (end - start) / 2;
+    std::cout << "After: " << v;
+    // Recursively sorting the max elements
     FJ(start, mid);
-    FJ(mid, end);
+    binaryInsertion(start, mid, end);
 
-    merge (start, mid, end);
 }
 
-void PmergeMeVector::merge(size_t start, size_t mid, size_t end)
+void PmergeMeVector::binaryInsertion(size_t start, size_t mid, size_t end)
 {
-    std::vector<size_t> temp(end - start);
-    size_t i = start, j = mid, k = 0;
-
-    while (i < mid && j < end)
+    for (size_t i = mid; i < end; i++)
     {
-        if (v[i] <= v[j])
-            temp[k++] = v[i++];
-        else
-            temp[k++] = v[j++];
+        size_t key = v[i];
+        size_t left = start;
+        size_t right = i - 1;
+    
+        while (left <= right)
+        {
+            size_t mid = left + (right - left) / 2;
+            if (v[mid] > key)
+            {
+                if (mid)
+                    right = mid - 1;
+                else
+                    break;
+            }
+            else
+            {
+                left = mid + 1;
+            }
+        }
+    
+        // Insert key at position left
+        for (size_t j = i; j > left; j--)
+        {
+            v[j] = v[j - 1];
+        }
+        v[left] = key;
     }
-
-    while (i < mid)
-        temp[k++] = v[i++];
-
-    while (j < end)
-        temp[k++] = v[j++];
-
-    for (i = start, k = 0; i < end;)
-        v[i++] = temp[k++];
 }
 
 void PmergeMeVector::printDuration() const

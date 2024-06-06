@@ -14,7 +14,7 @@ class PmergeMeVector : public PmergeMe
         ~PmergeMeVector();
 
         void FJ(size_t start, size_t end);
-        void merge(size_t start, size_t mid, size_t end);
+        void binaryInsertion(size_t start, size_t mid, size_t end);
         void printDuration() const;
 
         std::vector<size_t> getV() const;

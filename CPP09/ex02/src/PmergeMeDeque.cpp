@@ -46,6 +46,8 @@ void PmergeMeDeque::FJ(size_t start, size_t end)
     if (end - start < 2)
         return;
 
+    // Sorting the elements in pairs
+    size_t mid = start;
     for (size_t i = start; i < end - 1; i += 2)
     {
         if (d[i] > d[i + 1])
@@ -54,36 +56,42 @@ void PmergeMeDeque::FJ(size_t start, size_t end)
             d[i] = d[i + 1];
             d[i + 1] = temp;
         }
+        mid++;
     }
 
-    size_t mid = start + (end - start) / 2;
+    // Recursively sorting the max elements
     FJ(start, mid);
-    FJ(mid, end);
 
-    merge (start, mid, end);
-}
-
-void PmergeMeDeque::merge(size_t start, size_t mid, size_t end)
-{
-    std::deque<size_t> temp(end - start);
-    size_t i = start, j = mid, k = 0;
-
-    while (i < mid && j < end)
+    // Inserting the pending elements in the list of max elements using binary search
+    for (size_t i = mid; i < end; i++)
     {
-        if (d[i] <= d[j])
-            temp[k++] = d[i++];
-        else
-            temp[k++] = d[j++];
+        size_t key = d[i];
+        size_t left = start;
+        size_t right = i - 1;
+    
+        while (left <= right)
+        {
+            size_t mid = left + (right - left) / 2;
+            if (d[mid] > key)
+            {
+                if (mid)
+                    right = mid - 1;
+                else
+                    break;
+            }
+            else
+            {
+                left = mid + 1;
+            }
+        }
+    
+        // Insert key at position left
+        for (size_t j = i; j > left; j--)
+        {
+            d[j] = d[j - 1];
+        }
+        d[left] = key;
     }
-
-    while (i < mid)
-        temp[k++] = d[i++];
-
-    while (j < end)
-        temp[k++] = d[j++];
-
-    for (i = start, k = 0; i < end;)
-        d[i++] = temp[k++];
 }
 
 void PmergeMeDeque::printDuration() const

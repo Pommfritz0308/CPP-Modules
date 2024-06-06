@@ -14,7 +14,6 @@ class PmergeMeDeque : public PmergeMe
         ~PmergeMeDeque();
 
         void FJ(size_t start, size_t end);
-        void merge(size_t start, size_t mid, size_t end);
         void printDuration() const;
 
         std::deque<size_t> getD() const;
