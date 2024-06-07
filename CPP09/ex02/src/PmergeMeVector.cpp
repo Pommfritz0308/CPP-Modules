@@ -47,27 +47,25 @@ std::vector<size_t> PmergeMeVector::getV() const
     return v;
 }
 
+void    PmergeMeVector::swapRight()
+
 void PmergeMeVector::FJ(size_t start, size_t end)
 {
     if (end - start < 2)
         return;
 
     // Sorting the elements in pairs
-    size_t mid = start;
-    for (size_t i = start; i < end - 1; i += 2)
-    {
-        if (v[i] < v[i + 1])
-        {
-            std::swap(v[i], v[i + 1]);
-        }
-        std::swap(v[mid++], v[i]);
-    }
+    size_t mid = start + (end - start) / 2;
 
-    std::cout << "After: " << v;
+    for (size_t i = start; i < mid; i ++)
+    {
+        if (v[i] < v[mid + i])
+            std::swap(v[i], v[mid + i]);
+    }
     // Recursively sorting the max elements
     FJ(start, mid);
+    
     binaryInsertion(start, mid, end);
-
 }
 
 void PmergeMeVector::binaryInsertion(size_t start, size_t mid, size_t end)

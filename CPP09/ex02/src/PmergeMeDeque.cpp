@@ -47,42 +47,35 @@ void PmergeMeDeque::FJ(size_t start, size_t end)
         return;
 
     // Sorting the elements in pairs
-    size_t mid = start;
-    for (size_t i = start; i < end - 1; i += 2)
+    size_t mid = start + (end - start) / 2;
+    for (size_t i = start; i < mid; i ++)
     {
-        if (d[i] > d[i + 1])
-        {
-            size_t temp = d[i];
-            d[i] = d[i + 1];
-            d[i + 1] = temp;
-        }
-        mid++;
+        if (d[i] < d[mid + i])
+            std::swap(d[i], d[mid + i]);
+        
     }
-
     // Recursively sorting the max elements
     FJ(start, mid);
+    
+    binaryInsertion(start, mid, end);
+}
 
-    // Inserting the pending elements in the list of max elements using binary search
+void PmergeMeDeque::binaryInsertion(size_t start, size_t mid, size_t end)
+{
     for (size_t i = mid; i < end; i++)
     {
         size_t key = d[i];
         size_t left = start;
         size_t right = i - 1;
     
-        while (left <= right)
+        // Modified binary search to find the smallest range that would contain the key
+        while (left < right)
         {
             size_t mid = left + (right - left) / 2;
-            if (d[mid] > key)
-            {
-                if (mid)
-                    right = mid - 1;
-                else
-                    break;
-            }
-            else
-            {
+            if (d[mid] < key)
                 left = mid + 1;
-            }
+            else
+                right = mid;
         }
     
         // Insert key at position left
@@ -93,7 +86,6 @@ void PmergeMeDeque::FJ(size_t start, size_t end)
         d[left] = key;
     }
 }
-
 void PmergeMeDeque::printDuration() const
 {
     double t = (endTime - startTime) / (static_cast<double>(CLOCKS_PER_SEC) * 1000000);
