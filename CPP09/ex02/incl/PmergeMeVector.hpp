@@ -3,6 +3,7 @@
 
 #include "PmergeMe.hpp"
 #include <vector>
+#include <math.h>
 
 class PmergeMeVector : public PmergeMe
 {
@@ -16,6 +17,7 @@ class PmergeMeVector : public PmergeMe
         void FJ(size_t start, size_t end);
         void binaryInsertion(size_t start, size_t mid, size_t end);
         void printDuration() const;
+        void swapRight(size_t i, size_t mid);
 
         std::vector<size_t> getV() const;
 

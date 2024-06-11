@@ -47,7 +47,27 @@ std::vector<size_t> PmergeMeVector::getV() const
     return v;
 }
 
-void    PmergeMeVector::swapRight()
+template<class ForwardIt1, class ForwardIt2>
+ForwardIt2 swap_ranges(ForwardIt1 first1, ForwardIt1 last1, ForwardIt2 first2)
+{
+    for (; first1 != last1; ++first1, ++first2)
+        std::iter_swap(first1, first2);
+    return first2;
+}
+
+void    PmergeMeVector::swapRight(size_t i, size_t mid)
+{
+    int level = log2(v.size()/mid);
+    std::cout << "mid: " << mid << std::endl;
+    std::cout << "v.size(): " << v.size() << std::endl;
+    std::cout << "Level: " << level << std::endl << std::endl;
+
+    for (int j = 0; j < level; j++)
+    {
+        swap_ranges(x, x + pow(2, j),);
+    }
+
+}
 
 void PmergeMeVector::FJ(size_t start, size_t end)
 {
@@ -60,7 +80,7 @@ void PmergeMeVector::FJ(size_t start, size_t end)
     for (size_t i = start; i < mid; i ++)
     {
         if (v[i] < v[mid + i])
-            std::swap(v[i], v[mid + i]);
+            swapRight(v[i], mid);
     }
     // Recursively sorting the max elements
     FJ(start, mid);
