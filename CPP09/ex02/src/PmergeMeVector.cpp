@@ -47,15 +47,7 @@ std::vector<size_t> PmergeMeVector::getV() const
     return v;
 }
 
-template<class ForwardIt1, class ForwardIt2>
-ForwardIt2 swap_ranges(ForwardIt1 first1, ForwardIt1 last1, ForwardIt2 first2)
-{
-    for (; first1 != last1; ++first1, ++first2)
-        std::iter_swap(first1, first2);
-    return first2;
-}
-
-void    PmergeMeVector::swapRight(size_t i, size_t mid)
+void    PmergeMeVector::swapRight(size_t pos, size_t mid)
 {
     int level = log2(v.size()/mid);
     std::cout << "mid: " << mid << std::endl;
@@ -64,36 +56,37 @@ void    PmergeMeVector::swapRight(size_t i, size_t mid)
 
     for (int j = 0; j < level; j++)
     {
-        swap_ranges(x, x + pow(2, j),);
+        std::swap(v[pos], v[mid + pos]);
     }
 
 }
 
-void PmergeMeVector::FJ(size_t start, size_t end)
+void PmergeMeVector::FJ(size_t end)
 {
-    if (end - start < 2)
+    if (end < 2)
         return;
 
     // Sorting the elements in pairs
-    size_t mid = start + (end - start) / 2;
+    size_t mid = end / 2;
 
-    for (size_t i = start; i < mid; i ++)
+    for (size_t i = 0; i < mid; i ++)
     {
         if (v[i] < v[mid + i])
-            swapRight(v[i], mid);
+            swapRight(i, mid);
     }
     // Recursively sorting the max elements
-    FJ(start, mid);
+    std::cout << v << std::endl;
+    FJ(mid);
     
-    binaryInsertion(start, mid, end);
+    // binaryInsertion(mid, end);
 }
 
-void PmergeMeVector::binaryInsertion(size_t start, size_t mid, size_t end)
+void PmergeMeVector::binaryInsertion(size_t mid, size_t end)
 {
     for (size_t i = mid; i < end; i++)
     {
         size_t key = v[i];
-        size_t left = start;
+        size_t left = 0;
         size_t right = i - 1;
     
         while (left <= right)

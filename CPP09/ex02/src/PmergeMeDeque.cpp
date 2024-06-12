@@ -41,31 +41,31 @@ PmergeMeDeque::~PmergeMeDeque()
 
 }
 
-void PmergeMeDeque::FJ(size_t start, size_t end)
+void PmergeMeDeque::FJ(size_t end)
 {
-    if (end - start < 2)
+    if (end < 2)
         return;
 
     // Sorting the elements in pairs
-    size_t mid = start + (end - start) / 2;
-    for (size_t i = start; i < mid; i ++)
+    size_t mid = end / 2;
+    for (size_t i = 0; i < mid; i ++)
     {
         if (d[i] < d[mid + i])
             std::swap(d[i], d[mid + i]);
         
     }
     // Recursively sorting the max elements
-    FJ(start, mid);
+    FJ(mid);
     
-    binaryInsertion(start, mid, end);
+    binaryInsertion(mid, end);
 }
 
-void PmergeMeDeque::binaryInsertion(size_t start, size_t mid, size_t end)
+void PmergeMeDeque::binaryInsertion(size_t mid, size_t end)
 {
     for (size_t i = mid; i < end; i++)
     {
         size_t key = d[i];
-        size_t left = start;
+        size_t left = 0;
         size_t right = i - 1;
     
         // Modified binary search to find the smallest range that would contain the key

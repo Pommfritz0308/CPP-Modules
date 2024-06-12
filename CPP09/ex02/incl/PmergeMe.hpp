@@ -25,8 +25,8 @@ class PmergeMe
         PmergeMe &operator=(const PmergeMe &other);
         ~PmergeMe();
 
-        virtual void FJ(size_t start, size_t end) = 0;
-        virtual void binaryInsertion(size_t start, size_t mid, size_t end) = 0;
+        virtual void FJ(size_t end) = 0;
+        virtual void binaryInsertion(size_t mid, size_t end) = 0;
         void setStart();
         void setEnd();
 
