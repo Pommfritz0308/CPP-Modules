@@ -49,14 +49,24 @@ std::vector<size_t> PmergeMeVector::getV() const
 
 void    PmergeMeVector::swapRight(size_t pos, size_t mid)
 {
+    size_t a = pos;
+    size_t b = mid + pos;
+    std::swap(v[a], v[b]);
+    size_t start = mid;
     int level = log2(v.size()/mid);
     std::cout << "mid: " << mid << std::endl;
     std::cout << "v.size(): " << v.size() << std::endl;
     std::cout << "Level: " << level << std::endl << std::endl;
 
-    for (int j = 0; j < level; j++)
+    for (int j = 1; j < level; j++)
     {
-        std::swap(v[pos], v[mid + pos]);
+        start *= 2;
+        size_t end = start * 2;
+        std::cout << "start: " << start << " end: " << end << std::endl;
+        for (size_t i = start; i < end; i += 
+        {
+            
+        }
     }
 
 }
@@ -72,7 +82,9 @@ void PmergeMeVector::FJ(size_t end)
     for (size_t i = 0; i < mid; i ++)
     {
         if (v[i] < v[mid + i])
+        {
             swapRight(i, mid);
+        }
     }
     // Recursively sorting the max elements
     std::cout << v << std::endl;
