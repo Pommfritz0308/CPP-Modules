@@ -15,9 +15,11 @@ class PmergeMeVector : public PmergeMe
         ~PmergeMeVector();
 
         void FJ(size_t end);
+        void FJ(void);
         void binaryInsertion(size_t mid, size_t end);
         void printDuration() const;
         void swapRight(size_t i, size_t mid);
+        void insertPending(std::vector<std::vector<size_t> > &pyramid);
         
         std::vector<size_t> getV() const;
 
