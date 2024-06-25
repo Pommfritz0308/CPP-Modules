@@ -1,25 +1,37 @@
 #include "PmergeMeVector.hpp"
 
-PmergeMeVector::PmergeMeVector() : v()
+PmergeMeVector::PmergeMeVector() : pairs(), mainChain()
 {
 
 }
 
-PmergeMeVector::PmergeMeVector(char **argv) : v()
+PmergeMeVector::PmergeMeVector(char **argv, int argc) : pairs(), mainChain()
 {
-    for (int i = 0; argv[i]; i++)
+    size_t i = 0;
+    size_t a;
+    size_t b;
+    for (; argv[i] && i < static_cast<size_t>(argc - 1); i += 2)
     {
-        size_t n = std::atoll(argv[i]);
-        if (n <= 0)
+        a = std::atoll(argv[i]);
+        if (a <= 0)
         {
             throw std::invalid_argument("Only positive integers are allowed");
         }
-        v.push_back(n);
+        b = std::atoll(argv[i + 1]);
+        if (b <= 0)
+        {
+            throw std::invalid_argument("Only positive integers are allowed");
+        }
+        t_pair p;
+        a > b ? (p.larger = a, p.smaller = b) : (p.larger = b, p.smaller = a);
+        pairs.push_back(p);
     }
-    size = v.size();
+    // Check if argc indicates an odd number of user-provided arguments
+    unpaired = (argc - 1) % 2 == 0 ? 0 : std::atoll(argv[argc - 1]);
+    size = pairs.size();
 }
 
-PmergeMeVector::PmergeMeVector(const PmergeMeVector &other) : PmergeMe(other), v(other.v)
+PmergeMeVector::PmergeMeVector(const PmergeMeVector &other) : PmergeMe(other), pairs(other.pairs), mainChain(other.mainChain)
 {
 
 }
@@ -28,7 +40,9 @@ PmergeMeVector &PmergeMeVector::operator=(const PmergeMeVector &other)
 {
     if (this != &other)
     {
-        v = other.v;
+        mainChain = other.mainChain;
+        unpaired = other.unpaired;
+        pairs = other.pairs;
         size = other.size;
         startTime = other.startTime;
         endTime = other.endTime;
@@ -42,64 +56,107 @@ PmergeMeVector::~PmergeMeVector()
 }
 
 
-std::vector<size_t> PmergeMeVector::getV() const
+std::vector<size_t> PmergeMeVector::getList() const
 {
-    return v;
+    return mainChain;
 }
 
-void PmergeMeVector::FJ(size_t end)
+void PmergeMeVector::FJ()
 {
-    if (end < 2)
-        return;
+    // sort the pairs by the larger element from smallest to largest
+    sortPairs(0, size);
 
-    // Sorting the elements in pairs
-    size_t mid = end / 2;
-    for (size_t i = 0; i < end - 1; i += 2)
+    // generate the insertion sequence
+    std::vector<size_t> sequence = insertionSequence(size);
+
+    // push all larger elements + the first smaller element to the main chain
+    mainChain.push_back(pairs[0].smaller);
+    for (size_t i = 0; i < size; i++)
     {
-        if (v[i] < v[i + 1])
-        {
-            std::swap(v[i], v[i + 1]);
-        }
-        std::swap(v[mid++], v[i]);
+        mainChain.push_back(pairs[i].larger);
     }
 
-    std::cout << "After: " << v;
-    // Recursively sorting the max elements
-    FJ(mid);
-    binaryInsertion(mid, end);
-
+    binaryInsertion(sequence);
 }
 
-void PmergeMeVector::binaryInsertion(size_t mid, size_t end)
+void PmergeMeVector::sortPairs(size_t start, size_t end)
 {
-    for (size_t i = mid; i < end; i++)
+    if (end - start < 2)
+        return;
+
+    size_t mid = start + (end - start) / 2;
+    sortPairs(start, mid);
+    sortPairs(mid, end);
+    merge(start, mid, end);
+}
+
+std::vector<size_t> PmergeMeVector::insertionSequence(size_t n)
+{
+std::vector<size_t> sequence;
+    size_t jacobsthalNumber = 1;
+    size_t temp = 1;
+    for (size_t i = 2; jacobsthalNumber < n; i++)
     {
-        size_t key = v[i];
-        size_t left = 0;
-        size_t right = i - 1;
-    
-        while (left <= right)
+        // Calculate next power of 2 using bit shifting, safer for size_t
+        size_t nextPowerOfTwo = size_t(1) << i;
+        
+        // Check for potential overflow from the upcoming subtraction
+        if (nextPowerOfTwo < jacobsthalNumber || nextPowerOfTwo - jacobsthalNumber > std::numeric_limits<size_t>::max())
+            throw std::overflow_error("Range exceeded for size_t type");
+        
+        temp = jacobsthalNumber;
+        jacobsthalNumber = nextPowerOfTwo - jacobsthalNumber;
+
+        size_t j;
+        if (jacobsthalNumber > n)
+            j = n;
+        else
+            j = jacobsthalNumber;
+        for (; j > temp; j--)
         {
-            size_t mid = left + (right - left) / 2;
-            if (v[mid] > key)
-            {
-                if (mid)
-                    right = mid - 1;
-                else
-                    break;
-            }
-            else
-            {
-                left = mid + 1;
-            }
+            sequence.push_back(j - 1);
         }
-    
-        // Insert key at position left
-        for (size_t j = i; j > left; j--)
-        {
-            v[j] = v[j - 1];
+    }
+    return sequence;
+}
+
+void PmergeMeVector::merge(size_t start, size_t mid, size_t end)
+{
+    std::vector<t_pair> temp(end - start);
+    size_t i = start, j = mid, k = 0;
+
+    while (i < mid && j < end) {
+        if (pairs[i].larger <= pairs[j].larger) {
+            temp[k++] = pairs[i++];
+        } else {
+            temp[k++] = pairs[j++];
         }
-        v[left] = key;
+    }
+
+    while (i < mid) {
+        temp[k++] = pairs[i++];
+    }
+
+    while (j < end) {
+        temp[k++] = pairs[j++];
+    }
+
+    for (i = start, k = 0; i < end; ++i, ++k) {
+        pairs[i] = temp[k];
+    }
+}
+
+void PmergeMeVector::binaryInsertion(std::vector<size_t> &sequence)
+{
+    for (std::vector<size_t>::iterator it = sequence.begin(); it != sequence.end(); it++)
+    {
+        std::vector<size_t>::iterator pos = std::lower_bound(mainChain.begin(), mainChain.end(), pairs[*it].smaller);
+        mainChain.insert(pos, pairs[*it].smaller);
+    }
+    if (unpaired)
+    {
+        std::vector<size_t>::iterator pos = std::lower_bound(mainChain.begin(), mainChain.end(), unpaired);
+        mainChain.insert(pos, unpaired);
     }
 }
 
@@ -111,11 +168,10 @@ void PmergeMeVector::printDuration() const
 
 std::ostream &operator<<(std::ostream &os, const std::vector<size_t> &v)
 {
-    for (size_t i = 0; i < v.size(); i++)
+    for (std::vector<size_t>::const_iterator it = v.begin(); it != v.end(); it++)
     {
-        os << v[i] << " ";
+        os << *it << " ";
     }
     os << std::endl;
     return os;
 }
-

@@ -9,12 +9,17 @@ int main(int argc, char **argv)
     }
     try
     {
-        PmergeMeVector p(argv + 1);
-        std::cout << RBOLD("Before: ") << p.getV();
+        std::cout << RBOLD("Before: ");
+        for (int i = 1; argv[i]; i++)
+        {
+            std::cout << argv[i] << " ";
+        }
+        std::cout << std::endl;
+        PmergeMeVector p(argv + 1, argc);
         p.setStart();
-        p.FJ(p.getSize());
+        p.FJ();
         p.setEnd();
-        std::cout << GBOLD("After: ") << p.getV();
+        std::cout << GBOLD("After: ") << p.getList();
         p.printDuration();
 
         std::cout << std::endl;

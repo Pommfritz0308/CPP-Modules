@@ -21,7 +21,6 @@ class PmergeMeDeque : public PmergeMe
 
     private:
         std::deque<size_t> d;
-        size_t unpaired;
         
 };
 

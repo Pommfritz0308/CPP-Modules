@@ -7,6 +7,7 @@
 #include <iomanip>
 #include <algorithm>
 #include <limits>
+#include <vector>
 
 # define RST  "\x1B[0m"
 # define KRED  "\x1B[31m"
@@ -25,8 +26,8 @@ class PmergeMe
         PmergeMe &operator=(const PmergeMe &other);
         ~PmergeMe();
 
-        virtual void FJ(size_t end) = 0;
-        virtual void binaryInsertion(size_t mid, size_t end) = 0;
+        virtual void FJ() = 0;
+        virtual void binaryInsertion(std::vector<size_t> &sequence) = 0;
         void setStart();
         void setEnd();
 
@@ -37,6 +38,7 @@ class PmergeMe
         size_t size;
         std::clock_t startTime;
         std::clock_t endTime;
+        size_t unpaired;
 };
 
 #endif
