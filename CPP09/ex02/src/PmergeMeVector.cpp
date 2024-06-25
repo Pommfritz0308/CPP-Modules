@@ -49,75 +49,25 @@ std::vector<size_t> PmergeMeVector::getV() const
 
 void PmergeMeVector::FJ(size_t end)
 {
-    (void)end;
-    if (v.size() <= 1)
-        return ;
-    size_t pyramid_height = (std::log(v.size())/log(2));
-    // std::cout << "Pyramid height: " << pyramid_height << std::endl;
+    if (end < 2)
+        return;
 
-    std::vector<std::vector<size_t> >  pyramid(pyramid_height, std::vector<size_t>());
-    pyramid[0] = v;
-
-    for (size_t lvl = 0; lvl < pyramid_height - 1; lvl++)
+    // Sorting the elements in pairs
+    size_t mid = end / 2;
+    for (size_t i = 0; i < end - 1; i += 2)
     {
-        for (size_t i = 0; i < pyramid[lvl].size() - 1; i+=2)
+        if (v[i] < v[i + 1])
         {
-            if (pyramid[lvl][i] > pyramid[lvl][i + 1])
-            {
-                std::swap(pyramid[lvl][i], pyramid[lvl][i+1]);
-                int span = 1;
-                for (int curr_lvl = lvl - 1; curr_lvl >= 0; curr_lvl--)
-                {
-                    span *= 2;
-                    std::swap_ranges(
-                        pyramid[curr_lvl].begin() + i * span,
-                        pyramid[curr_lvl].begin() + i * span + span,
-                        pyramid[curr_lvl].begin() + i * span + span);
-                }
-            }
-            pyramid[lvl + 1].push_back(pyramid[lvl][i + 1]);
+            std::swap(v[i], v[i + 1]);
         }
-        std::cout << "Level " << lvl << ": " << pyramid[lvl] << std::endl;
+        std::swap(v[mid++], v[i]);
     }
-    std::cout << "Level " << pyramid_height << ": " << pyramid[pyramid_height - 1] << std::endl;
-    // size_t mid = pyramid[pyramid_height - 1].size() / 2;
-    // binaryInsertion(mid, end);
-}
 
-void PmergeMeVector::FJ(void)
-{
-    if (v.size() <= 1)
-        return ;
-    size_t pyramid_height = (std::log(v.size())/log(2));
-    // std::cout << "Pyramid height: " << pyramid_height << std::endl;
+    std::cout << "After: " << v;
+    // Recursively sorting the max elements
+    FJ(mid);
+    binaryInsertion(mid, end);
 
-    std::vector<std::vector<size_t> >  pyramid(pyramid_height, std::vector<size_t>());
-    pyramid[0] = v;
-
-    for (size_t lvl = 0; lvl <= pyramid_height - 1; lvl++)
-    {
-        for (size_t i = 0; i < pyramid[lvl].size() - 1; i+=2)
-        {
-            if (pyramid[lvl][i] > pyramid[lvl][i + 1])
-            {
-                std::swap(pyramid[lvl][i], pyramid[lvl][i+1]);
-                int span = 1;
-                for (int curr_lvl = lvl - 1; curr_lvl >= 0; curr_lvl--)
-                {
-                    span *= 2;
-                    std::swap_ranges(
-                        pyramid[curr_lvl].begin() + i * span,
-                        pyramid[curr_lvl].begin() + i * span + span,
-                        pyramid[curr_lvl].begin() + i * span + span);
-                }
-            }
-            if (lvl < pyramid_height - 1)
-                pyramid[lvl + 1].push_back(pyramid[lvl][i + 1]);
-        }
-        std::cout << "Level " << lvl << ": " << pyramid[lvl] << std::endl;
-    }
-    // size_t mid = pyramid[pyramid_height - 1].size() / 2;
-    insertPending(pyramid);
 }
 
 void PmergeMeVector::binaryInsertion(size_t mid, size_t end)
@@ -143,22 +93,13 @@ void PmergeMeVector::binaryInsertion(size_t mid, size_t end)
                 left = mid + 1;
             }
         }
-        // Swap key into position at left
-        while (i > left)
+    
+        // Insert key at position left
+        for (size_t j = i; j > left; j--)
         {
-            std::swap(v[i], v[i - 1]);
-            i--;
+            v[j] = v[j - 1];
         }
-    }
-}
-
-void PmergeMeVector::insertPending(std::vector<std::vector<size_t> > &pyramid)
-{
-    v = pyramid[pyramid.size() - 1];
-
-    for (size_t level = pyramid.size() - 2; level >= 0; level--)
-    {
-        
+        v[left] = key;
     }
 }
 

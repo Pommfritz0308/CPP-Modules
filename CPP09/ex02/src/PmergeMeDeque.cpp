@@ -48,16 +48,20 @@ void PmergeMeDeque::FJ(size_t end)
 
     // Sorting the elements in pairs
     size_t mid = end / 2;
-    for (size_t i = 0; i < mid; i ++)
+    for (size_t i = 0; i < end - 1; i += 2)
     {
-        if (d[i] < d[mid + i])
-            std::swap(d[i], d[mid + i]);
-        
+        if (d[i] < d[i + 1])
+        {
+            std::swap(d[i], d[i + 1]);
+        }
+        std::swap(d[mid++], d[i]);
     }
+
+    std::cout << "After: " << d;
     // Recursively sorting the max elements
     FJ(mid);
-    
     binaryInsertion(mid, end);
+
 }
 
 void PmergeMeDeque::binaryInsertion(size_t mid, size_t end)

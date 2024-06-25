@@ -12,7 +12,7 @@ int main(int argc, char **argv)
         PmergeMeVector p(argv + 1);
         std::cout << RBOLD("Before: ") << p.getV();
         p.setStart();
-        p.FJ();
+        p.FJ(p.getSize());
         p.setEnd();
         std::cout << GBOLD("After: ") << p.getV();
         p.printDuration();
