@@ -5,11 +5,6 @@
 #include <vector>
 #include <math.h>
 
-struct t_pair
-{
-    size_t larger;
-    size_t smaller;
-};
 
 class PmergeMeVector : public PmergeMe
 {
@@ -25,12 +20,11 @@ class PmergeMeVector : public PmergeMe
         void sortPairs(size_t start, size_t end);
         void binaryInsertion(std::vector<size_t> &sequence);
         std::vector<size_t> insertionSequence (size_t n);
-        void printDuration() const;
+        void printDuration(size_t range) const;
         
         std::vector<size_t> getList() const;
 
     private:
-
         std::vector<t_pair> pairs;
         std::vector<size_t> mainChain;
 };

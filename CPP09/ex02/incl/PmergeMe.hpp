@@ -27,18 +27,22 @@ class PmergeMe
         ~PmergeMe();
 
         virtual void FJ() = 0;
-        virtual void binaryInsertion(std::vector<size_t> &sequence) = 0;
         void setStart();
         void setEnd();
 
         size_t getSize() const;
-        virtual void printDuration() const = 0;
+        virtual void printDuration(size_t range) const = 0;
 
     protected:
         size_t size;
         std::clock_t startTime;
         std::clock_t endTime;
         size_t unpaired;
+        struct t_pair
+        {
+            size_t larger;
+            size_t smaller;
+        };
 };
 
 #endif

@@ -7,10 +7,10 @@ PmergeMeVector::PmergeMeVector() : pairs(), mainChain()
 
 PmergeMeVector::PmergeMeVector(char **argv, int argc) : pairs(), mainChain()
 {
-    size_t i = 0;
+    size_t len = (argc) / 2;
     size_t a;
     size_t b;
-    for (; argv[i] && i < static_cast<size_t>(argc - 1); i += 2)
+    for (size_t i = 0; len > 0; i += 2, len--)
     {
         a = std::atoll(argv[i]);
         if (a <= 0)
@@ -26,8 +26,10 @@ PmergeMeVector::PmergeMeVector(char **argv, int argc) : pairs(), mainChain()
         a > b ? (p.larger = a, p.smaller = b) : (p.larger = b, p.smaller = a);
         pairs.push_back(p);
     }
-    // Check if argc indicates an odd number of user-provided arguments
-    unpaired = (argc - 1) % 2 == 0 ? 0 : std::atoll(argv[argc - 1]);
+    if ((argc) % 2 == 1)
+        unpaired = std::atoll(argv[argc - 1]);
+    else
+        unpaired = 0;
     size = pairs.size();
 }
 
@@ -70,7 +72,8 @@ void PmergeMeVector::FJ()
     std::vector<size_t> sequence = insertionSequence(size);
 
     // push all larger elements + the first smaller element to the main chain
-    mainChain.push_back(pairs[0].smaller);
+    if (size > 0)
+        mainChain.push_back(pairs[0].smaller);
     for (size_t i = 0; i < size; i++)
     {
         mainChain.push_back(pairs[i].larger);
@@ -160,10 +163,10 @@ void PmergeMeVector::binaryInsertion(std::vector<size_t> &sequence)
     }
 }
 
-void PmergeMeVector::printDuration() const
+void PmergeMeVector::printDuration(size_t range) const
 {
     double t = (endTime - startTime) / (static_cast<double>(CLOCKS_PER_SEC) * 1000000);
-    std::cout << YBOLD("Time to process a range of ") << BOLD(size) << YBOLD(" elements with std::vector: ") << std::fixed << std::setprecision(12) << t << " us" << std::endl;
+    std::cout << YBOLD("Time to process a range of ") << BOLD(range) << YBOLD(" elements with std::vector: ") << std::fixed << std::setprecision(12) << t << " us" << std::endl;
 }
 
 std::ostream &operator<<(std::ostream &os, const std::vector<size_t> &v)
