@@ -41,6 +41,12 @@ void Span::addNumber(int numb)
         throw (Span::ContainerFull());
 }
 
+void Span::addSpan(int startRange, int endRange)
+{
+    for (int i = startRange; i < endRange; i++, addNumber(i))
+    {}
+}
+
 const char* Span::NoSpan::what() const throw()
 {
     return ("No span found");

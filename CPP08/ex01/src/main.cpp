@@ -25,12 +25,7 @@ int main (void)
 
     try
     {
-        srand(time(NULL));
-        for(int i = 0; i < 10000; i++)
-        {
-            int numb = rand() % 10000;
-            big.addNumber(numb);
-        }
+        big.addSpan(0, 1000);
         std::cout << "Shortest span is: " << big.shortestSpan() << std::endl;
         std::cout << "Longest span is: " << big.longestSpan() << std::endl;
 

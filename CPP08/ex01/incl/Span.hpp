@@ -25,6 +25,7 @@ class Span
         std::vector<int>& getBuff();
 
         void addNumber(int numb);
+        void addSpan(int range, int size);
         unsigned int shortestSpan();
         unsigned int longestSpan();
 
