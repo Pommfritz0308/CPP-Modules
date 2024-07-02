@@ -77,10 +77,10 @@ unsigned int Span::shortestSpan()
         unsigned int temp = 0;
         std::sort(buff.begin(), buff.end());
         std::vector<int>::iterator it = buff.begin();
-        for (; it != buff.end(); temp = *it)
+        for (; it != buff.end() - 1; temp = *it)
         {
             it++;
-            if (it != buff.end() && -(temp - *it) < diff)
+            if (-(temp - *it) < diff)
                 diff = -(temp - *it);
         }
         return (diff);
